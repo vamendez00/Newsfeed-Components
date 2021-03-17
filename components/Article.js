@@ -3,7 +3,7 @@
 // You can read about ES6 modules here: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
 
 
-//arbitrary changes for submission
+
 const data = [
   {
     title: 'Lambda School Students: "We\'re the best!"',
@@ -92,6 +92,62 @@ const data = [
   }
 ];
 
+const articles = document.querySelector(".articles");
+
+//STEPS 1 & 2
+function articleMaker ({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+  
+  const article = document.createElement("div");
+  article.classList.add("article", "close");
+
+  const articleTitle = document.createElement("h3");
+  articleTitle.textContent = title;
+  article.appendChild(articleTitle);
+
+  const articleDate = document.createElement("p");
+  articleDate.classList.add("date");
+  articleDate.textContent = date;
+  article.appendChild(articleDate);
+
+  const articleParagraph1 = document.createElement("p");
+  articleParagraph1.textContent = firstParagraph;
+  article.appendChild(articleParagraph1);
+
+  const articleParagraph2 = document.createElement("p");
+  articleParagraph2.textContent = secondParagraph;
+  article.appendChild(articleParagraph2);
+
+  const articleParagraph3 = document.createElement("p");
+  articleParagraph3.textContent = thirdParagraph;
+  article.appendChild(articleParagraph3);
+
+  const expandButtonSpan = document.createElement("span");
+  expandButtonSpan.textContent = "+";
+  expandButtonSpan.classList.add("expandButton", "close");
+  article.appendChild(expandButtonSpan);
+  
+  // const expandButton = document.createElement("button");
+  // expandButtonSpan.classList.add("close");
+  // expandButton.textContent = "+";
+  // expandButtonSpan.appendChild(expandButton);
+  
+  //toggle event listener
+  expandButtonSpan.addEventListener("cick", function(event){
+    article.classList.toggle("article-open");
+    // expandButtonSpan.classList.toggle("article-open");
+  })
+  
+//STEP 3  
+  return article;
+}
+
+// console.log(articleMaker());
+
+//STEP 4
+data.forEach((dataItem) => {
+  const dataArticle = articleMaker(dataItem);
+  articles.appendChild(dataArticle);
+});
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
@@ -105,6 +161,7 @@ const data = [
 
     <span class="expandButton">+</span>
   </div>
+
 
   Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
   This listener should toggle the class 'article-open' on div.article.
