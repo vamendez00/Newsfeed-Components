@@ -99,6 +99,7 @@ function articleMaker ({title, date, firstParagraph, secondParagraph, thirdParag
   
   const article = document.createElement("div");
   article.classList.add("article", "close");
+  article.style.overflow = "scroll";  //SMALL STYLE change to fit all content
 
   const articleTitle = document.createElement("h2");
   articleTitle.textContent = title;
