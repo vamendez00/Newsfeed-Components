@@ -94,13 +94,13 @@ const data = [
 
 const articles = document.querySelector(".articles");
 
-//STEPS 1 & 2
+//STEPS 1
 function articleMaker ({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
   
   const article = document.createElement("div");
   article.classList.add("article", "close");
 
-  const articleTitle = document.createElement("h3");
+  const articleTitle = document.createElement("h2");
   articleTitle.textContent = title;
   article.appendChild(articleTitle);
 
@@ -123,18 +123,13 @@ function articleMaker ({title, date, firstParagraph, secondParagraph, thirdParag
 
   const expandButtonSpan = document.createElement("span");
   expandButtonSpan.textContent = "+";
-  expandButtonSpan.classList.add("expandButton", "close");
+  expandButtonSpan.classList.add("expand-button","close");
   article.appendChild(expandButtonSpan);
   
-  // const expandButton = document.createElement("button");
-  // expandButtonSpan.classList.add("close");
-  // expandButton.textContent = "+";
-  // expandButtonSpan.appendChild(expandButton);
-  
-  //toggle event listener
-  expandButtonSpan.addEventListener("cick", function(event){
+  //STEP 2
+  expandButtonSpan.addEventListener("click", function(event){
     article.classList.toggle("article-open");
-    // expandButtonSpan.classList.toggle("article-open");
+
   })
   
 //STEP 3  
@@ -144,10 +139,64 @@ function articleMaker ({title, date, firstParagraph, secondParagraph, thirdParag
 // console.log(articleMaker());
 
 //STEP 4
-data.forEach((dataItem) => {
+function applyData(array){
+array.forEach((dataItem) => {
   const dataArticle = articleMaker(dataItem);
   articles.appendChild(dataArticle);
-});
+}) 
+return array;
+}
+applyData(data);
+// console.log(data);
+
+//PART 2
+let newArticles = [
+{
+  'title': 'If I Were King of the Forest',
+  'date': 'Mar 17th, 2021',
+  'firstParagraph': `If I Were King Of The Forest not queen, not duke, not prince
+  My regal robes of the forest would be satin, not cotton, not chintz`,
+
+  'secondParagraph': `I'd command each thing, be it fish or fowl, with a woof and a woof, and a royal
+  growl`,
+
+  'thirdParagraph': `As I'd click my heel all the trees would kneel and the mountains bow and the
+  bulls kowtow
+  And the sparrows would take wing, if I were king`
+},
+{
+    'title': 'The Rainbow Connection',
+    'date': 'Mar 17th, 2021',
+    'firstParagraph': `Why are there so many songs about rainbows
+    And what's on the other side?
+    Rainbows are visions, but only illusions
+    And rainbows have nothing to hide`,
+  
+    'secondParagraph': `So we've been told and some choose to believe it
+    I know they're wrong, wait and see
+    Someday we'll find it, the rainbow connection
+    The lovers, the dreamers and me`,
+  
+    'thirdParagraph': `Who said that every wish would be heard and answered?
+    We wished on the morning star
+    Somebody thought of that, and someone believed it
+    Look what it's done so far`
+  }];
+  console.log (newArticles);
+
+  //NOTE TO SELF: if i push this onto the array, i end up with original 4 plus the 6 (duplicate 4 + 2 new articles).
+  // newArticles.forEach(function(item){
+  //   data.push(item);
+  //   return data;
+  // });
+
+  applyData(newArticles);
+  console.log(data);
+// END OF PART 2
+
+
+
+
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
