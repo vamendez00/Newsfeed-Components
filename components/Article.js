@@ -92,8 +92,76 @@ const data = [
 /*
   Step 1: Write a component called 'articleMaker' to create an article.
   Your component is a function that takes an article object as its only argument,
-  and returns a DOM node looking like the one below:
+  and returns a DOM node looking like the one below:*/
 
+  //declare component parent for appending later
+  let articles = document.querySelector(".articles");
+
+  //articleMaker()
+
+  function articleMaker ( {title, date, firstParagraph, secondParagraph, thirdParagraph}) {
+
+    const article = document.createElement("div");
+    article.classList.add("article", "close");
+    article.style.overflow = "scroll"; //style preference
+
+    
+    const articleTitle = document.createElement("h2");
+    articleTitle.textContent = title;
+    article.appendChild(articleTitle);
+
+    const articleDate = document.createElement("p");
+    articleDate.textContent = date;
+    articleDate.classList.add("date");
+    article.appendChild(articleDate);
+
+    const articleParagraph1 = document.createElement("p");
+    articleParagraph1.textContent = firstParagraph;
+    article.appendChild(articleParagraph1);
+
+    const articleParagraph2 = document.createElement("p");
+    articleParagraph2.textContent = secondParagraph;
+    article.appendChild(articleParagraph2);
+
+    const articleParagraph3 = document.createElement("p");
+    articleParagraph3.textContent = thirdParagraph;
+    article.appendChild(articleParagraph3);
+
+    const articleExpand = document.createElement("span");
+    articleExpand.textContent = "+";
+    articleExpand.classList.add("expandButton", "close");
+    article.appendChild(articleExpand);
+
+    //STEP 2
+    articleExpand.addEventListener("click", function(event){
+      article.classList.toggle("article-open");
+    })
+    
+    //extra - want to move article over on click, need to figure out toggle
+    const menuButton = document.querySelector(".menu-button");
+    menuButton.addEventListener("click", function(){
+      article.style.marginLeft = "360px";
+    })
+
+    //STEP 3
+    return article;
+  }
+
+//STEP 4
+function applyData(array){
+  array.forEach((dataItem) => {
+    const dataArticle = articleMaker(dataItem);
+    articles.appendChild(dataArticle);
+  }) 
+  return array;
+  }
+  applyData(data);
+  // console.log(data);
+
+
+
+
+/*
   <div class="article">
     <h2>{title of the article}</h2>
     <p class="date">{date of the article}</p>
@@ -114,3 +182,41 @@ const data = [
   Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   Refresh the page to see the new article.
 */
+
+//Step 5
+let newArticles = [
+  {
+    'title': 'If I Were King of the Forest',
+    'date': 'Mar 17th, 2021',
+    'firstParagraph': `If I Were King Of The Forest not queen, not duke, not prince
+    My regal robes of the forest would be satin, not cotton, not chintz`,
+  
+    'secondParagraph': `I'd command each thing, be it fish or fowl, with a woof and a woof, and a royal
+    growl`,
+  
+    'thirdParagraph': `As I'd click my heel all the trees would kneel and the mountains bow and the
+    bulls kowtow
+    And the sparrows would take wing, if I were king`
+  },
+  {
+      'title': 'The Rainbow Connection',
+      'date': 'Mar 17th, 2021',
+      'firstParagraph': `Why are there so many songs about rainbows
+      And what's on the other side?
+      Rainbows are visions, but only illusions
+      And rainbows have nothing to hide`,
+    
+      'secondParagraph': `So we've been told and some choose to believe it
+      I know they're wrong, wait and see
+      Someday we'll find it, the rainbow connection
+      The lovers, the dreamers and me`,
+    
+      'thirdParagraph': `Who said that every wish would be heard and answered?
+      We wished on the morning star
+      Somebody thought of that, and someone believed it
+      Look what it's done so far`
+    }];
+    console.log (newArticles);
+
+    applyData(newArticles);
+    console.log(data);
