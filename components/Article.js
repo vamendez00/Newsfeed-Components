@@ -89,28 +89,118 @@ const data = [
   }
 ];
 
-/*
-  Step 1: Write a component called 'articleMaker' to create an article.
-  Your component is a function that takes an article object as its only argument,
-  and returns a DOM node looking like the one below:
 
-  <div class="article">
-    <h2>{title of the article}</h2>
-    <p class="date">{date of the article}</p>
+  // Step 1: Write a component called 'articleMaker' to create an article.
+  // Your component is a function that takes an article object as its only argument,
+  // and returns a DOM node looking like the one below:
 
-    {three separate paragraph elements}
+  function articleMaker ({title, date, firstParagraph, secondParagraph, thirdParagraph}) {
 
-    <span class="expandButton">+</span>
-  </div>
+    let article = document.createElement("div");
+    let articleTitle = document.createElement("h2");
+    let articleDate = document.createElement("p");
+    let articlePara1 = document.createElement("p");
+    let articlePara2 = document.createElement("p");
+    let articlePara3 = document.createElement("p");
+    let articleExpand = document.createElement("span");
 
-  Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
-  This listener should toggle the class 'article-open' on div.article.
+    article.classList.add("article", "close");
+    articleDate.classList.add("date");
+    articleExpand.classList.add("expandButton");
 
-  Step 3: Don't forget to return something from your function!
+    articleTitle.textContent = title;
+    articleDate.textContent = date;
+    articlePara1.textContent = firstParagraph;
+    articlePara2.textContent =secondParagraph;
+    articlePara3.textContent = thirdParagraph; 
+    articleExpand.textContent = "+";
+    
+    article.appendChild(articleTitle);
+    article.appendChild(articleDate);
+    article.appendChild(articlePara1);
+    article.appendChild(articlePara2);
+    article.appendChild(articlePara3);
+    article.appendChild(articleExpand);
 
-  Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
-  to create a div.article element and append it to the DOM inside div.articles (see index.html).
+    articleExpand.addEventListener("click", (event) => {
+      // console.log(event);
+      article.classList.toggle("article-open");
+    });
 
-  Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
-  Refresh the page to see the new article.
-*/
+    
+
+    return article;
+  }
+
+
+  let articleContainer = document.querySelector(".articles");
+
+  function dataHandler(array) {  
+    array.forEach((item) => {
+      let articleItem = articleMaker(item);
+      articleContainer.appendChild(articleItem);
+    });
+    return articleContainer;
+  }
+
+  dataHandler(data);
+
+
+  //REUSING DATA FROM LAST COHORT - did not copy any of the MVP coding.
+  
+  let newArticles = [
+    {
+      'title': 'If I Were King of the Forest',
+      'date': 'Mar 17th, 2021',
+      'firstParagraph': `If I Were King Of The Forest not queen, not duke, not prince
+      My regal robes of the forest would be satin, not cotton, not chintz`,
+    
+      'secondParagraph': `I'd command each thing, be it fish or fowl, with a woof and a woof, and a royal
+      growl`,
+    
+      'thirdParagraph': `As I'd click my heel all the trees would kneel and the mountains bow and the
+      bulls kowtow
+      And the sparrows would take wing, if I were king`
+    },
+    {
+        'title': 'The Rainbow Connection',
+        'date': 'Mar 17th, 2021',
+        'firstParagraph': `Why are there so many songs about rainbows
+        And what's on the other side?
+        Rainbows are visions, but only illusions
+        And rainbows have nothing to hide`,
+      
+        'secondParagraph': `So we've been told and some choose to believe it
+        I know they're wrong, wait and see
+        Someday we'll find it, the rainbow connection
+        The lovers, the dreamers and me`,
+      
+        'thirdParagraph': `Who said that every wish would be heard and answered?
+        We wished on the morning star
+        Somebody thought of that, and someone believed it
+        Look what it's done so far`
+      }];
+      console.log (newArticles);
+  
+      dataHandler(newArticles);
+
+
+  // <div class="article">
+  //   <h2>{title of the article}</h2>
+  //   <p class="date">{date of the article}</p>
+
+  //   {three separate paragraph elements}
+
+  //   <span class="expandButton">+</span>
+  // </div>
+
+  // Step 2: Still inside `articleMaker`, add an event listener to the span.expandButton.
+  // This listener should toggle the class 'article-open' on div.article.
+
+  // Step 3: Don't forget to return something from your function!
+
+  // Step 4: Outside your function now, loop over the data. At each iteration you'll use your component
+  // to create a div.article element and append it to the DOM inside div.articles (see index.html).
+
+  // Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
+  // Refresh the page to see the new article.
