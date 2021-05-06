@@ -109,11 +109,15 @@ const data = [
     articleExpand.classList.add("expandButton");
 
     articleTitle.textContent = title;
+    articleTitle.style.fontSize = "20px";
+
     articleDate.textContent = date;
     articlePara1.textContent = firstParagraph;
     articlePara2.textContent =secondParagraph;
     articlePara3.textContent = thirdParagraph; 
     articleExpand.textContent = "+";
+    articleExpand.style.fontSize = "20px";
+    articleExpand.style.fontWeight = "bold";
     
     article.appendChild(articleTitle);
     article.appendChild(articleDate);
@@ -125,6 +129,8 @@ const data = [
     articleExpand.addEventListener("click", (event) => {
       // console.log(event);
       article.classList.toggle("article-open");
+      article.style.overflowY="scroll";
+      
     });
 
     
@@ -134,6 +140,8 @@ const data = [
 
 
   let articleContainer = document.querySelector(".articles");
+  articleContainer.style.marginLeft="200px";
+
 
   function dataHandler(array) {  
     array.forEach((item) => {
@@ -147,7 +155,7 @@ const data = [
 
 
   //REUSING DATA FROM LAST COHORT - did not copy any of the MVP coding.
-  
+
   let newArticles = [
     {
       'title': 'If I Were King of the Forest',
@@ -204,3 +212,14 @@ const data = [
 
   // Step 5: Try adding new article object to the data array. Make sure it is in the same format as the others.
   // Refresh the page to see the new article.
+
+
+// Experimenting
+
+function changeHeader(event) {
+  console.log(event);
+  header.style.backgroundColor = "steelblue";
+}
+
+let header = document.querySelector(".header");
+  window.addEventListener("load", changeHeader);
