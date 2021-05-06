@@ -9,6 +9,61 @@ let menuItems = [
   'Log Out'
 ];
 
+const header = document.querySelector(".header"); //container for below
+
+function menuMaker(){
+  const menu = document.createElement("div");
+  menu.classList.add("menu");
+
+  const menuItemList = document.createElement("ul");
+  menu.appendChild(menuItemList);
+
+
+  menuItems.forEach(function(item) {
+    let menuItem = document.createElement("li");
+    menuItem.textContent = item;
+    menuItem.style.fontSize = "22px";
+
+    menuItem.addEventListener("mouseover", (e)=> {
+      menuItem.style.color = "maroon";
+      menuItem.style.fontWeight = "bold";
+    });
+    menuItem.addEventListener("mouseleave", (e)=> {
+      menuItem.style.color = "white";
+    });
+
+    menuItemList.appendChild(menuItem);
+
+
+  });
+
+
+  const menuButton = document.querySelector(".menu-button");
+ 
+
+  menuButton.addEventListener("click", function(){
+    menu.classList.toggle("menu--open");
+    menu.style.backgroundColor = "lightslategrey";
+    menu.style.width = "200px";
+  
+  })
+
+  header.prepend(menu);
+  return menu;
+}
+menuMaker(menuItems);
+
+// Experimenting
+
+// function changeMenu(event) {
+//   console.log(event);
+//   menu.style.backgroundColor = "lightslategrey";
+//   menu.style.transition = "2s";
+// }
+
+// let menu = document.querySelector(".menu");
+//   menu.addEventListener("mouseover", changeMenu);
+
 /* 
   Step 1: Write a component called 'menuMaker' to create a menu like the markup below:
 
